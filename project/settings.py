@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'jwt_auth',
-    'insta'    
+    'insta'
 ]
 
 MIDDLEWARE = [
@@ -131,7 +131,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# AUTH_USER_MODEL = 'jwt.User'
+AUTH_USER_MODEL = 'jwt_auth.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
