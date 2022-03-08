@@ -1,3 +1,5 @@
+from distutils.command.upload import upload
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -6,7 +8,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    profile_image = models.CharField(max_length=500)
+    profile_image = models.ImageField(upload_to='media/', default='profilePic.png')
     bio = models.TextField(max_length=180)
     is_private = models.BooleanField(default=False)
     followed_by = models.ManyToManyField(

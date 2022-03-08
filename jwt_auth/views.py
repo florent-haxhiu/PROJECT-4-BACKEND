@@ -6,6 +6,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDe
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from datetime import datetime, timedelta
 import jwt
 from .serializers.common import RegisterSerializer, ProfileSerializer, DMSerializer, ProfileEditSerializer
 
@@ -38,7 +39,9 @@ class LoginView(APIView):
         if not user.check_password(password):
             raise PermissionDenied({ 'message': 'Invalid credentials' })
         
-        token = jwt.encode({ 'sub': user.id }, settings.SECRET_KEY, algorithm='HS256')
+        login_time = datetime.now() + timedelta(days=3)
+        
+        token = jwt.encode({ 'sub': user.id, 'exp': int(login_time.strftime('%s')) }, settings.SECRET_KEY, algorithm='HS256')
         return Response({ 'token': token, 'message': f'Welcome {user.username}.' })
     
 
