@@ -19,16 +19,18 @@ class PostListView(APIView):
         return Response(serial.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        serial = PostSerializer(data=request.data)
+        serialized_data = PostSerializer(data=request.data)
         print(request.data)
-        # request.data['author'] = request.data.id
         try:
-            serial.is_valid()
-            serial.save()
-            return Response(serial.data, status=status.HTTP_201_CREATED)
+            print(serialized_data)
+            serialized_data.is_valid()
+            serialized_data.save()
+            return Response(serialized_data.data, status=status.HTTP_201_CREATED)
         except IntegrityError as e:
+            print(e)
             return Response({"detail": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         except AssertionError as e:
+            print(e)
             return Response({"detail": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         except:
             return Response(

@@ -5,7 +5,7 @@ from django.db import models
 class Post(models.Model):
     caption = models.TextField(max_length=180)
     created_at = models.DateTimeField(auto_now_add=True)
-    post_image = models.CharField(max_length=500)
+    post_image = models.CharField(max_length=1000)
     liked_by = models.ManyToManyField(
         'jwt_auth.User',
         related_name='liked_posts',

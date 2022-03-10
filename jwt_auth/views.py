@@ -65,7 +65,7 @@ class EditProfileView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
 
     queryset = User.objects.all()
-    serializer_class = ProfileEditSerializer    
+    serializer_class = ProfileEditSerializer  
 class UserFollowView(UpdateAPIView):
     permission_class = (IsAuthenticated,)
     
